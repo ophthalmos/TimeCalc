@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <StartupObject>TimeCalc.Program</StartupObject>
+    <ApplicationIcon>TimeCalc.ico</ApplicationIcon>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyVersion>2.0</AssemblyVersion>
+    <NeutralLanguage>de</NeutralLanguage>
+    <FileVersion>2.0.0.0</FileVersion>
+    <Platforms>AnyCPU;x64</Platforms>
+    <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
+    <IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="clsExcelFile.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="DocumentFormat.OpenXml.dll" />
+    <None Remove="DocumentFormat.OpenXml.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TimeCalc.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;E:\Code\CodeSigning\signtool.exe sign /f E:\Code\CodeSigning\WHappe.pfx /p htYdOR5QZMkbK /fd sha256 /tr http://timestamp.comodoca.com/?td=sha256 /td sha256 /as /v $(TargetPath)&#xD;&#xA;)" />
+  </Target>
+
+</Project>
