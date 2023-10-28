@@ -61,8 +61,4 @@
     </None>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;E:\Code\CodeSigning\signtool.exe sign /f E:\Code\CodeSigning\WHappe.pfx /p htYdOR5QZMkbK /fd sha256 /tr http://timestamp.comodoca.com/?td=sha256 /td sha256 /as /v $(TargetPath)&#xD;&#xA;)" />
-  </Target>
-
 </Project>
