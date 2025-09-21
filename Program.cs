@@ -1,19 +1,15 @@
-﻿using System;
-using System.Windows.Forms;
+﻿namespace TimeCalc;
 
-namespace TimeCalc
+internal static class Program
 {
-    static class Program
+    /// <summary>
+    /// Der Haupteinstiegspunkt für die Anwendung.
+    /// </summary>
+    [STAThread]
+    private static void Main()
     {
-        /// <summary>
-        /// Der Haupteinstiegspunkt für die Anwendung.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmTimeCalc());
-        }
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.Run(new FrmTimeCalc());
     }
 }

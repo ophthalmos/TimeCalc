@@ -1,24 +1,27 @@
 ﻿using System.Globalization;
 
-namespace TimeCalc
+namespace TimeCalc;
+
+public partial class Absences : Form
 {
-    public partial class Absences : Form
+    internal DataGridView Dgv
     {
-        internal DataGridView dgv { get { return dataGridView; } set { dataGridView = value; } } // Control als Eigenschaft offenlegen (DataGridView in diesem Formular!):
+        get => dataGridView;
+        set => dataGridView = value;
+    } // Control als Eigenschaft offenlegen (DataGridView in diesem Formular!):
 
-        public Absences()
+    public Absences()
+    {
+        InitializeComponent();
+        dataGridView.Rows.Add(12);
+        for (var i = 0; i < dataGridView.Rows.Count; i++)
         {
-            InitializeComponent();
-            dataGridView.Rows.Add(12);
-            for (int i = 0; i < dataGridView.Rows.Count; i++)
-            {
-                dataGridView.Rows[i].HeaderCell.Value = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1);
-            }
+            dataGridView.Rows[i].HeaderCell.Value = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1);
         }
+    }
 
-        private void Absences_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape) { this.DialogResult = DialogResult.Cancel; }
-        }
+    private void Absences_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Escape) { DialogResult = DialogResult.Cancel; }
     }
 }
